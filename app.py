@@ -5,59 +5,28 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
 
 import subprocess
 
-def run_command(command):
-    """
-    执行命令并返回结果
-    """
+# 使用 curl 下载安装脚本
+def download_script():
     try:
-        subprocess.check_call(command, shell=True)
+        print("Downloading the installation script...")
+        subprocess.run(["curl", "-s", "https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh"], check=True)
+        print("Download successful.")
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while executing the command: {e}")
-        return False
-    return True
+        print(f"An error occurred while downloading the script: {e}")
 
-def update_apt_package_list():
-    """
-    更新APT软件包列表
-    """
-    print("Updating package list...")
-    return run_command("sudo apt-get update")
-
-def add_git_lfs_repository():
-    """
-    添加git-lfs的软件仓库
-    """
-    print("Adding git-lfs repository...")
-    return run_command("curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash")
-
-def install_packages(packages):
-    """
-    安装指定的软件包列表
-    """
-    print(f"Installing packages: {' '.join(packages)}")
-    install_command = "sudo apt-get install -y " + " ".join(packages)
-    return run_command(install_command)
-
-def main2():
-    # 更新软件包列表
-    if not update_apt_package_list():
-        print("Failed to update package list. Exiting.")
-        return
-
-    # 添加git-lfs仓库
-    if not add_git_lfs_repository():
-        print("Failed to add git-lfs repository. Exiting.")
-        return
-
-    # 安装git和git-lfs
-    packages = ["git", "git-lfs"]
-    if install_packages(packages):
-        print("Packages installed successfully.")
-    else:
-        print("Failed to install packages. Exiting.")
+# 安装 Git LFS
+def install_git_lfs():
+    try:
+        print("Installing git-lfs...")
+        subprocess.run(["apt", "install", "git-lfs"], check=True)
+        print("Git LFS installation successful.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while installing git-lfs: {e}")
 
 
-main2()
+download_script()  # 下载安装脚本
+install_git_lfs()  # 安装 Git LFS
+
 
 
 
