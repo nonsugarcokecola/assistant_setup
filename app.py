@@ -18,7 +18,7 @@ def download_script():
 def install_git_lfs():
     try:
         print("Installing git-lfs...")
-        subprocess.run(["apt", "install", "git-lfs"], check=True)
+        subprocess.run(["git", "lfs", "install"], check=True)
         print("Git LFS installation successful.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while installing git-lfs: {e}")
