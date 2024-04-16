@@ -22,12 +22,18 @@ def install_git_lfs():
         print("Git LFS installation successful.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while installing git-lfs: {e}")
-
+def install_git_lfs2():
+    try:
+        print("Installing git-lfs...")
+        subprocess.run(["git", "lfs", "install"], check=True)
+        print("Git LFS installation successful2.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while installing git-lfs2: {e}")
 # 主函数
 
 download_script()  # 下载安装脚本
 install_git_lfs()  # 安装 Git LFS
-
+install_git_lfs2()
 
 
 
