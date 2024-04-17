@@ -5,27 +5,27 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
 
 import subprocess
 
-# 使用 curl 下载安装脚本
-def download_script():
-    try:
-        print("Downloading the installation script...")
-        subprocess.run(["curl", "-s", "https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh"], check=True)
-        print("Download successful.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while downloading the script: {e}")
+# # 使用 curl 下载安装脚本
+# def download_script():
+#     try:
+#         print("Downloading the installation script...")
+#         subprocess.run(["curl", "-s", "https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh"], check=True)
+#         print("Download successful.")
+#     except subprocess.CalledProcessError as e:
+#         print(f"An error occurred while downloading the script: {e}")
 
-# 安装 Git LFS
-def install_git_lfs():
-    try:
-        print("Installing git-lfs...")
-        subprocess.run(["git", "lfs", "install"], check=True)
-        print("Git LFS installation successful.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while installing git-lfs: {e}")
+# # 安装 Git LFS
+# def install_git_lfs():
+#     try:
+#         print("Installing git-lfs...")
+#         subprocess.run(["git", "lfs", "install"], check=True)
+#         print("Git LFS installation successful.")
+#     except subprocess.CalledProcessError as e:
+#         print(f"An error occurred while installing git-lfs: {e}")
 
 
-download_script()  # 下载安装脚本
-install_git_lfs()  # 安装 Git LFS
+# download_script()  # 下载安装脚本
+# install_git_lfs()  # 安装 Git LFS
 
 
 
