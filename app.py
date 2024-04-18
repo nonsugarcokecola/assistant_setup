@@ -26,8 +26,6 @@ try:
     
     # 执行后续的apt-get命令
     subprocess.run("apt-get update", shell=True)
-    subprocess.run("apt-get install Acquire", shell=True)
-    subprocess.run("apt-get install open", shell=True)
     subprocess.run("apt-get install git -y", shell=True)
     subprocess.run("apt-get install git-lfs -y", shell=True)
 
