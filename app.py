@@ -1,4 +1,4 @@
-import gradio as gr
+ import gradio as gr
 import os
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
@@ -10,7 +10,7 @@ import subprocess
 
 # 使用shell=True来执行包含管道的命令
 try:
-    获取所有包含'apt'的进程
+    #获取所有包含'apt'的进程
     result = subprocess.run("ps -e | grep apt", shell=True, stdout=subprocess.PIPE, text=True)
     apt_processes = result.stdout
     
