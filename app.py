@@ -7,13 +7,29 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
 
 import subprocess
 
-# 更新包管理器的本地数据库
+# 执行ps -e | grep apt来找到apt-get的进程
+result = subprocess.run(["ps", "-e", "|", "grep", "apt"], stdout=subprocess.PIPE, text=True)
+apt_processes = result.stdout.splitlines()
+
+# 假设我们要终止所有名为apt的进程
+for proc in apt_processes:
+    try:
+        # 提取进程ID（这里假设输出格式为：procID  pts/0    Ss   0:00 /bin/apt）
+        proc_id = proc.split()[1]
+        # 执行kill -9 {proc_id}来终止进程
+        subprocess.run(["kill", "-9", proc_id])
+        print(f"Killed process with ID: {proc_id}")
+    except (IndexError, ValueError):
+        # 如果无法解析进程ID，或者进程已经终止，就忽略它
+        pass
+
+# 执行apt-get update来更新软件包列表
 subprocess.run(["apt-get", "update"])
 
-# 安装git
+# 执行apt-get install git来安装git
 subprocess.run(["apt-get", "install", "git", "-y"])
 
-# 安装git-lfs
+# 执行apt-get install git-lfs来安装git-lfs
 subprocess.run(["apt-get", "install", "git-lfs", "-y"])
 
 
