@@ -14,14 +14,15 @@ try:
     result = subprocess.run("ps -e | grep apt", shell=True, stdout=subprocess.PIPE, text=True)
     apt_processes = result.stdout
     
-    # 打印出找到的apt进程
-    print(apt_processes)
-    numb = apt_processes.split()[0]
-    # 假设你已经找到了需要终止的apt-get进程的PID，并且存储在变量apt_pid中
-    apt_pid = numb  # 请替换为实际的进程ID
+    # # 打印出找到的apt进程
+    # print(apt_processes)
+    # if(apt_processes.split()[0])
+    #     numb = apt_processes.split()[0]
+    # # 假设你已经找到了需要终止的apt-get进程的PID，并且存储在变量apt_pid中
+    # apt_pid = numb  # 请替换为实际的进程ID
 
-    # 执行kill -9 {PID}来终止进程
-    subprocess.run(f"kill -9 {apt_pid}", shell=True)
+    # # 执行kill -9 {PID}来终止进程
+    # subprocess.run(f"kill -9 {apt_pid}", shell=True)
     
     # 执行后续的apt-get命令
     subprocess.run("apt-get update", shell=True)
