@@ -7,31 +7,28 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
 
 import subprocess
 
-# 执行ps -e | grep apt来找到apt-get的进程
-result = subprocess.run(["ps", "-e", "|", "grep", "apt"], stdout=subprocess.PIPE, text=True)
-apt_processes = result.stdout.splitlines()
+# 使用shell=True来执行包含管道的命令
+try:
+    # 获取所有包含'apt'的进程
+    result = subprocess.run("ps -e | grep apt", shell=True, stdout=subprocess.PIPE, text=True)
+    apt_processes = result.stdout
+    
+    # 打印出找到的apt进程
+    print(apt_processes)
+    
+    # 假设你已经找到了需要终止的apt-get进程的PID，并且存储在变量apt_pid中
+    apt_pid = "YOUR_PID_HERE"  # 请替换为实际的进程ID
 
-# 假设我们要终止所有名为apt的进程
-for proc in apt_processes:
-    try:
-        # 提取进程ID（这里假设输出格式为：procID  pts/0    Ss   0:00 /bin/apt）
-        proc_id = proc.split()[1]
-        # 执行kill -9 {proc_id}来终止进程
-        subprocess.run(["kill", "-9", proc_id])
-        print(f"Killed process with ID: {proc_id}")
-    except (IndexError, ValueError):
-        # 如果无法解析进程ID，或者进程已经终止，就忽略它
-        pass
+    # 执行kill -9 {PID}来终止进程
+    subprocess.run(f"kill -9 {apt_pid}", shell=True)
+    
+    # 执行后续的apt-get命令
+    subprocess.run("sudo apt-get update", shell=True)
+    subprocess.run("sudo apt-get install git -y", shell=True)
+    subprocess.run("sudo apt-get install git-lfs -y", shell=True)
 
-# 执行apt-get update来更新软件包列表
-subprocess.run(["apt-get", "update"])
-
-# 执行apt-get install git来安装git
-subprocess.run(["apt-get", "install", "git", "-y"])
-
-# 执行apt-get install git-lfs来安装git-lfs
-subprocess.run(["apt-get", "install", "git-lfs", "-y"])
-
+except subprocess.CalledProcessError as e:
+    print(f"An error occurred: {e}")
 
 
 
