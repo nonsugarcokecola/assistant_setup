@@ -23,9 +23,9 @@ try:
     subprocess.run(f"kill -9 {apt_pid}", shell=True)
     
     # 执行后续的apt-get命令
-    subprocess.run("sudo apt-get update", shell=True)
-    subprocess.run("sudo apt-get install git -y", shell=True)
-    subprocess.run("sudo apt-get install git-lfs -y", shell=True)
+    subprocess.run("apt-get update", shell=True)
+    subprocess.run("apt-get install git -y", shell=True)
+    subprocess.run("apt-get install git-lfs -y", shell=True)
 
 except subprocess.CalledProcessError as e:
     print(f"An error occurred: {e}")
