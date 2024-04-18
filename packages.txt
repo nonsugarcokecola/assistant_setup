@@ -1,4 +1,4 @@
+reboot
 update
 git
-update
 git-lfs
