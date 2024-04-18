@@ -12,7 +12,7 @@ import subprocess
 try:
     
     
-    subprocess.run("kill -9 $(ps -ef | grep apt)", shell=True, stdout=subprocess.PIPE, text=True)
+    subprocess.run(["pkill", "-f", "apt"])
     # 打印出找到的apt进程
     # print(apt_processes)
     # if(apt_processes.split()[0])
