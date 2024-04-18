@@ -28,6 +28,15 @@ try:
     subprocess.run("apt-get update", shell=True)
     subprocess.run("apt-get install git -y", shell=True)
     subprocess.run("apt-get install git-lfs -y", shell=True)
+    subprocess.run(["apt-get", "clean"], check=True)
+    subprocess.run(["apt-get", "update"], check=True)
+
+    # 移除dpkg锁文件
+    subprocess.run(["rm", "/var/lib/dpkg/lock-frontend"], check=True)
+    subprocess.run(["rm", "/var/lib/dpkg/lock"], check=True)
+
+    # 修复损坏的包
+    subprocess.run(["dpkg", "--configure", "-a"], check=True)
 
 except subprocess.CalledProcessError as e:
     print(f"An error occurred: {e}")
