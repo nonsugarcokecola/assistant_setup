@@ -6,20 +6,20 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, AutoModel
 
 
 import subprocess
-
-result = subprocess.run(["ps", "-e", "|", "grep", "apt"], stdout=subprocess.PIPE, text=True)
-apt_processes = result.stdout.splitlines()
-
-# 假设我们要终止所有名为apt的进程
-for proc in apt_processes:
-    try:
+try:
+    result = subprocess.run(["ps", "-e", "|", "grep", "apt"], stdout=subprocess.PIPE, text=True)
+    apt_processes = result.stdout.splitlines()
+    
+    # 假设我们要终止所有名为apt的进程
+    for proc in apt_processes:
+        
         # 提取进程ID（这里假设输出格式为：procID  pts/0    Ss   0:00 /bin/apt）
         proc_id = proc.split()[0]
         # 执行kill -9 {proc_id}来终止进程
         subprocess.run(f"kill -9 {proc_id}", shell=True)
-    except (IndexError, ValueError):
-        # 如果无法解析进程ID，或者进程已经终止，就忽略它
-        pass
+
+except subprocess.CalledProcessError as e:
+    print(f"An error occurred: {e}")
 
 
 
