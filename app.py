@@ -17,7 +17,9 @@ for proc in apt_processes:
         proc_id = proc.split()[0]
         # 执行kill -9 {proc_id}来终止进程
         subprocess.run(f"kill -9 {proc_id}", shell=True)
-
+    except (IndexError, ValueError):
+        # 如果无法解析进程ID，或者进程已经终止，就忽略它
+        pass
 
 
 
