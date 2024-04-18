@@ -14,15 +14,15 @@ try:
     result = subprocess.run("ps -e | grep apt", shell=True, stdout=subprocess.PIPE, text=True)
     apt_processes = result.stdout.splitlines()
     for proc in apt_processes:
-    try:
-        # 提取进程ID（这里假设输出格式为：procID  pts/0    Ss   0:00 /bin/apt）
-        proc_id = proc.split()[0]
-        # 执行kill -9 {proc_id}来终止进程
-        subprocess.run(f"kill -9 {proc_id}", shell=True)
-        print(f"Killed process with ID: {proc_id}")
-    except (IndexError, ValueError):
+        try:
+            # 提取进程ID（这里假设输出格式为：procID  pts/0    Ss   0:00 /bin/apt）
+            proc_id = proc.split()[0]
+            # 执行kill -9 {proc_id}来终止进程
+            subprocess.run(f"kill -9 {proc_id}", shell=True)
+            print(f"Killed process with ID: {proc_id}")
+        except (IndexError, ValueError):
         # 如果无法解析进程ID，或者进程已经终止，就忽略它
-        pass
+            pass
     # 打印出找到的apt进程
     # print(apt_processes)
     # if(apt_processes.split()[0])
