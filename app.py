@@ -12,7 +12,7 @@ import subprocess
 try:
     
     
-    # subprocess.run("pkill -f apt-get", shell=True)
+    subprocess.run("killall -g apt", shell=True)
 
     # 打印出找到的apt进程
     # print(apt_processes)
