@@ -48,8 +48,8 @@ def chat(message,history):
         yield response
 
 gr.ChatInterface(chat,
-                 title="InternLM2-Chat-7B",
+                 title="HFUT-FengRu-Assistant",
                 description="""
-InternLM is mainly developed by Shanghai AI Laboratory.  
+Fine tuning InternLM developed by Shanghai AI Laboratory.  
                  """,
                  ).queue(1).launch()
